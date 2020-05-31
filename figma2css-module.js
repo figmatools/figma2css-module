@@ -121,6 +121,7 @@ module.exports = (data) => {
   }
   let css = '',
     objectName = data['name'];
+  classesList = []
   if(data['children']) {
     data['children'].forEach((item) => {
       css = appendCSS(item, css);   

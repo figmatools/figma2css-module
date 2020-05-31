@@ -1,6 +1,6 @@
 {
   "name": "figma2css-module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "figma2css-module.js",
   "scripts": {
