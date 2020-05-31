@@ -96,7 +96,6 @@ let classesList = [];
 * and styles
 */
 function appendCSS(item, css) {
-  console.log('item: ', item)
   if(item.type === 'TEXT' || item.type === 'VECTOR' || item.type === 'RECTANGLE') {
     if((item.name.match(/^\./) || item.name.match(/^\#/)) && 
       !classesList.find(elem => elem === item.name+item.type)){
@@ -122,7 +121,6 @@ module.exports = (data) => {
   }
   let css = '',
     objectName = data['name'];
-  console.log('object name: ', objectName)
   if(data['children']) {
     data['children'].forEach((item) => {
       css = appendCSS(item, css);   
@@ -130,8 +128,6 @@ module.exports = (data) => {
   }else {
     css = appendCSS(data, css);
   }
-
-  console.log('css: ', css)
 
   if(!css) {
     return;

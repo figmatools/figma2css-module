@@ -1,10 +1,10 @@
 {
   "name": "figma2css-module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "figma2css-module.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./__test__/test.js"
   },
   "keywords": [],
   "author": "",
