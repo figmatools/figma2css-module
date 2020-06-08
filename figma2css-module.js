@@ -49,17 +49,17 @@ function transformVector(css, item) {
   let opts = parseOptions(item); 
   css += `${item.name.split('[')[0]} {\n`;
   if(ADD_WIDTH || opts['W']) 
-    css += `\twidth: ${item.absoluteBoundingBox.width}px !important;\n`;
+    css += `  width: ${item.absoluteBoundingBox.width}px ;\n`;
   if(ADD_HEIGHT || opts['H'])
-    css += `\theight: ${item.absoluteBoundingBox.height}px !important;\n`;
+    css += `  height: ${item.absoluteBoundingBox.height}px ;\n`;
   if(item.fills.length) {
-    css += `\tbackground-color: ${formatColor(item.fills[0].color)} !important;\n`;
+    css += `  background-color: ${formatColor(item.fills[0].color)} ;\n`;
   }
   if(item.strokes.length) {
-    css += `\tborder: ${item.strokeWeight}px ${item.strokes[0].type} ${formatColor(item.strokes[0].color)} !important;\n`;
+    css += `  border: ${item.strokeWeight}px ${item.strokes[0].type} ${formatColor(item.strokes[0].color)} ;\n`;
   }
   if(item.cornerRadius) {
-    css += `\tborder-radius: ${item.cornerRadius}px !important;\n`;
+    css += `  border-radius: ${item.cornerRadius}px ;\n`;
   }
   css += '}\n\n';
   return css;
@@ -72,10 +72,10 @@ let styleTransformers = {
       if(validProperties[key]) {
         let prop = validProperties[key](item, 'prop'),
             value = validProperties[key](item, 'value');
-        css += `\t${prop}: ${value} !important;\n`;
+        css += `  ${prop}: ${value} ;\n`;
       }
     });
-    css += `\tcolor: ${formatColor(item.fills[0].color)} !important;\n`
+    css += `  color: ${formatColor(item.fills[0].color)} ;\n`
     css += '}\n\n';
     return css;
   },
@@ -92,7 +92,7 @@ let classesList = [];
 
 /**
 * append to css variable based 
-* on the type of nome, creating the class 
+* on the type of name, creating the class 
 * and styles
 */
 function appendCSS(item, css) {
@@ -115,6 +115,7 @@ function appendCSS(item, css) {
 
 
 module.exports = (data) => {
+  console.log('data: ', data)
   if(!data) {
     console.error('no data was passed to the transform function!');
     return;
@@ -122,13 +123,14 @@ module.exports = (data) => {
   let css = '',
     objectName = data['name'];
   classesList = []
-  if(data['children']) {
-    data['children'].forEach((item) => {
-      css = appendCSS(item, css);   
-    });
-  }else {
-    css = appendCSS(data, css);
-  }
+  css = appendCSS(data, css);
+  // if(data['children']) {
+  //   data['children'].forEach((item) => {
+  //     css = appendCSS(item, css);   
+  //   });
+  // }else {
+  //   css = appendCSS(data, css);
+  // }
 
   if(!css) {
     return;
