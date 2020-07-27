@@ -102,20 +102,13 @@ function appendCSS(item, css) {
       classesList.push(item.name+item.type);
       css = styleTransformers[item.type](css, item);
     }
-  } else {
-    if(item.children) {
-      item.children.forEach((subitem) => {
-        css = appendCSS(subitem, css); 
-      });
-    }
-  }
+  } 
   return css;
 }
 
 
 
 module.exports = (data) => {
-  console.log('data: ', data)
   if(!data) {
     console.error('no data was passed to the transform function!');
     return;
@@ -124,16 +117,9 @@ module.exports = (data) => {
     objectName = data['name'];
   classesList = []
   css = appendCSS(data, css);
-  // if(data['children']) {
-  //   data['children'].forEach((item) => {
-  //     css = appendCSS(item, css);   
-  //   });
-  // }else {
-  //   css = appendCSS(data, css);
-  // }
 
-  if(!css) {
-    return;
+  if(css === '') {
+    return false;
   }
   
   return css;
